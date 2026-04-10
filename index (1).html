@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<title>San Valentín 💖</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 🌌 NUEVO FONDO ANIME CLARO */
+    background-image: url('https://lh3.googleusercontent.com/d/1BbUMOReKIyUVx722s2Cnchrf5XBcmnUL');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+ 
+/* Opcional: contenedor del corazón */
+.corazon{
+    filter: drop-shadow(0 15px 25px rgba(0, 90, 150, 0.25));
+}
+
+#boton{
+    width:80vmin;
+    height:80vmin;
+    background-image: url("https://drive.google.com/thumbnail?id=1uO1DkRkXzJofOf-aNaOFp5pPWhDVl1cb&sz=w1000");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border:none;
+    cursor:pointer;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    animation: palpitar 1.2s infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transition: all 0.5s ease;
+    
+}
+
+/* 💓 Animación más suave */
+@keyframes palpitar{
+    0%{ transform:translate(-50%, -50%) scale(1); }
+    50%{ transform:translate(-50%, -50%) scale(1.08); }
+    100%{ transform:translate(-50%, -50%) scale(1); }
+}
+
+/* ✨ Texto encima del corazón */
+.texto-corazon{
+    font-family: 'Pacifico', cursive;
+    color:white;
+    font-size:7vmin;
+    text-shadow:0 0 15px rgba(255,255,255,0.9);
+    position:relative;
+    top:-100px; /* 👈 esto lo sube */
+}
+
+/* TARJETA */
+#tarjeta{
+    backdrop-filter:blur(3px);
+    width:900px;
+    height:500px;
+
+    background:linear-gradient(
+        150deg,
+        hsl(229, 76%, 87%),
+        #88a1f2
+    );
+
+    border-radius:30px;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%) scale(0.2);
+    opacity:0;
+    pointer-events:none;
+    z-index:10;
+    overflow:hidden;
+    border:3px solid rgba(160,160,255,0.6);
+
+    box-shadow:
+        0 0 15px rgba(140,140,255,0.4),
+        0 0 30px rgba(140,140,255,0.3),
+        0 0 60px rgba(140,140,255,0.2);
+        /* sin animation aquí */
+
+}
+
+#tarjeta.activa{
+    animation: 
+        aparecerMagico 0.8s ease-out forwards,
+        brilloBorde 2s infinite alternate;
+}
+
+@keyframes aparecerMagico{
+     0%{
+        transform:translate(-50%, -30%) scale(0.2) rotate(-5deg);
+        opacity:0;
+    }
+    60%{
+        transform:translate(-50%, -55%) scale(1.05) rotate(2deg);
+        opacity:1;
+    }
+    100%{
+        transform:translate(-50%, -50%) scale(1) rotate(0);
+        opacity:1;  /* 👈 AGREGA ESTO */
+    }
+}
+#tarjeta::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:30px;
+    pointer-events:none;
+
+    background-image:
+        radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px),
+        radial-gradient(rgba(173,216,230,0.8) 1px, transparent 1px);
+
+    background-size: 50px 50px, 60px 60px;
+    background-position: 0 0, 20px 30px;
+
+    animation: parpadeo 4s infinite alternate;
+}
+@keyframes brillos{
+    from{ background-position:0 0; }
+    to{ background-position:0 200px; }
+}
+#tarjeta:before{
+    content:"";
+    position:absolute;
+    top:-50%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background:linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255,255,255,0.7) 50%,
+        transparent 70%
+    );
+    transform:rotate(25deg);
+    animation: brilloMovimiento 3s infinite;
+}   
+
+@keyframes brilloTarjeta{
+     0%{
+        box-shadow:
+            0 20px 40px rgba(0,0,0,0.35),
+            0 0 30px rgba(120,120,255,0.6),
+            0 0 60px rgba(120,120,255,0.5),
+            0 0 90px rgba(120,120,255,0.4);
+    }
+    100%{
+        box-shadow:
+            0 20px 40px rgba(0,0,0,0.35),
+            0 0 70px rgba(140,140,255,1),
+            0 0 140px rgba(140,140,255,0.9),
+            0 0 200px rgba(140,140,255,0.8);
+    }
+}
+@keyframes brilloBorde{
+    0%{
+        box-shadow:
+            0 0 20px rgba(140,140,255,0.6),
+            0 0 40px rgba(140,140,255,0.5),
+            0 0 80px rgba(140,140,255,0.4);
+    }
+    100%{
+        box-shadow:
+            0 0 40px rgba(170,170,255,1),
+            0 0 80px rgba(170,170,255,0.9),
+            0 0 160px rgba(170,170,255,0.8);
+    }
+}
+/* PAPEL CUADRICULADO ROJO */
+.fondo-cuadro{
+    position:absolute;
+    left:80px;
+    top:100px;
+    width:360px;
+    transform:rotate(7deg);
+    z-index:1;
+   
+}
+
+/* PAPEL PRINCIPAL */
+.carta{
+    position:absolute;
+    left:40px;
+    top:130px;
+    width:400px;
+    height:300px;
+    transform:rotate(-6deg);
+    z-index:2;
+}
+
+/* IMAGEN DEL PAPEL */
+.papel{
+    width:100%;
+}
+
+/* CONTENIDO */
+.contenido{
+    position:absolute;
+    top:20px;
+    left:25px;
+    right:25px;
+}
+
+.fecha{
+    font-family:'Dancing Script', cursive;
+    font-size:12px;
+    color:#000000;
+}
+
+.texto{
+    font-family: 'Dancing Script', cursive;
+    font-size: 12px;opacity:0;
+    transform:translateY(20px);
+    animation: aparecerTexto 1.5s ease forwards;
+    animation-delay:0.8s;
+    margin-top: 15px;   /* 💖 baja el texto */
+}
+
+@keyframes aparecerTexto{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* CLIP */
+#clip{
+    position:absolute;
+    top:-30px;
+    left:90%;
+    width:50px;
+    transform:translateX(-50%) rotate(15deg);
+    z-index:5;
+}
+
+/* FLORES */
+#flores{
+    position:absolute;
+    bottom:-20px;
+    left:-15px;   /* 👈 ajusta este número */
+    width:220px;
+    height:auto;
+    object-fit:contain;
+    z-index:4;
+}
+
+/* COLLAR */
+.contenedor-corazon{
+    position:absolute;
+    bottom:100px;
+    right:40px;
+    width:400px;
+    z-index:3;
+}
+
+.collar{
+    width:100%;
+    display:block;
+    animation: brilloCollar 2s infinite alternate ease-in-out;
+}
+
+/* ZONA INTERNA DEL CORAZÓN */
+.lluvia{
+    position:absolute;
+    top:20%;
+    left:22%;
+    width:56%;
+    height:55%;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+/* CORAZONES */
+.lluvia span{
+    position:absolute;
+    font-size:16px;
+    animation: caer 5s linear infinite;
+    opacity:0.8;
+}
+
+/* posiciones diferentes */
+.lluvia span:nth-child(1){ left:10%; animation-delay:0s; }
+.lluvia span:nth-child(2){ left:25%; animation-delay:1s; }
+.lluvia span:nth-child(3){ left:45%; animation-delay:2s; }
+.lluvia span:nth-child(4){ left:65%; animation-delay:3s; }
+.lluvia span:nth-child(5){ left:80%; animation-delay:1.5s; }
+.lluvia span:nth-child(6){ left:55%; animation-delay:2.5s; }
+
+@keyframes caer{
+    0%{
+        top:-10%;
+        transform:scale(0.8);
+        opacity:0;
+    }
+    15%{
+        opacity:1;
+    }
+    100%{
+        top:110%;
+        transform:scale(1.1);
+        opacity:0;
+    }
+}
+@keyframes brilloCollar{
+    0%{
+        filter:
+            drop-shadow(0 0 5px rgba(255,255,255,0.6))
+            drop-shadow(0 0 10px rgba(180,200,255,0.6));
+    }
+    100%{
+        filter:
+            drop-shadow(0 0 20px rgba(255,255,255,1))
+            drop-shadow(0 0 40px rgba(200,220,255,0.9));
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<button id="boton">
+    <span class="texto-corazon">Ábreme 💌</span>
+</button>
+
+<div id="tarjeta">
+    <img src="cuadros.png" class="fondo-cuadro">
+    
+    <div class="carta">
+
+    <img src="papel.png" class="papel">
+
+    <img src="clip.png" id="clip">
+
+    <img src="flores2.gif" id="flores">
+
+    <div class="contenido">
+        
+        <div class="fecha">05/04/26</div>
+        <div class="texto">
+            No sé en qué momento pasó, pero te volviste parte de mis días. Desde que llegaste, todo se siente más bonito y siempre encuentro una razón para pensar en ti. Me gusta la tranquilidad que siento contigo y la forma en que logras hacer especial hasta los momentos más simples. La verdad, me gusta mucho lo que siento por ti.
+            <br><br>
+            ...........💌
+        </div>
+         
+    </div>
+</div>    
+
+<div class="contenedor-corazon">
+    <img src="collar.png" class="collar">
+
+    <div class="lluvia">
+        <span>💗</span>
+        <span>💖</span>
+        <span>💘</span>
+        <span>💕</span>
+        <span>💞</span>
+        <span>💓</span>
+    </div>
+</div>
+
+</div>
+
+<audio id="musica" preload="auto">
+    <source src="https://drive.google.com/uc?export=download&id=1ntHx9mgw_zqwziFS6YTbgUtE72IUltyE" type="audio/mpeg">
+</audio>
+
+
+
+<script>
+document.getElementById("boton").addEventListener("click", function(){
+
+    const boton = document.getElementById("boton");
+    const tarjeta = document.getElementById("tarjeta");
+    const audio = document.getElementById("musica");
+
+    audio.volume = 0;
+
+    audio.play().catch(error => {
+        console.log("No se pudo reproducir:", error);
+    });
+
+    boton.style.opacity = "0";
+    boton.style.transform = "translate(-50%, -50%) scale(0.6)";
+
+    setTimeout(() => {
+        boton.style.display = "none";
+        tarjeta.classList.add("activa");
+    }, 400);
+
+    let volumen = 0;
+    const subirVolumen = setInterval(() => {
+        if (volumen < 1) {
+            volumen += 0.02;
+            audio.volume = volumen;
+        } else {
+            clearInterval(subirVolumen);
+        }
+    }, 100);
+
+});
+</script>
+
+
+</body>
+</html>
