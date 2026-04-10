@@ -386,10 +386,7 @@ body {
 
 </div>
 
-<audio id="musica" preload="auto">
-    <source src="https://drive.google.com/uc?export=download&id=1ntHx9mgw_zqwziFS6YTbgUtE72IUltyE" type="audio/mpeg">
-</audio>
-
+<audio id="musica" src="musica.mp3" preload="auto"></audio>
 
 
 <script>
@@ -399,7 +396,8 @@ document.getElementById("boton").addEventListener("click", function(){
     const tarjeta = document.getElementById("tarjeta");
     const audio = document.getElementById("musica");
 
-    audio.volume = 0;
+    audio.currentTime = 0;
+    audio.volume = 1;
 
     audio.play().catch(error => {
         console.log("No se pudo reproducir:", error);
